@@ -1,0 +1,7 @@
+heap snapshot 6.11
+file: notes-leak.heapsnapshot (4.6 MiB, not checked in)
+node_count: 27115
+LeakyCtor name nodes: 202  (200 instances + ctor/map)
+strings include: LeakyCtor, LEAK_MARKER_, system / SharedFunctionInfo / LeakyCtor
+retainer: leaked[] in the script keeps the 200 instances live
+taken via: gc({type:'major-snapshot', filename:'notes-leak.heapsnapshot'}) --expose-gc

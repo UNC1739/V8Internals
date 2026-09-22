@@ -1,0 +1,1050 @@
+
+======== VERSION ========
+15.3.76.13
+
+======== 1.1 TAGGING — Smi vs HeapNumber vs oddballs ========
+typeof 1 = number
+typeof 1.5 = number
+--- Smi 1 ---
+DebugPrint: Smi: 0x1 (1)
+
+--- HeapNumber 1.5 ---
+DebugPrint: 0x29f50102b7f1: [HeapNumber] in OldSpace
+ - map: 0x29f500000515 <Map[12](HEAP_NUMBER_TYPE)>
+ - value: 1.5
+0x29f500000515: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: HEAP_NUMBER_TYPE
+ - instance size: 12
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- HeapNumber beyond Smi (2^30) ---
+DebugPrint: 0x29f50102b7fd: [HeapNumber] in OldSpace
+ - map: 0x29f500000515 <Map[12](HEAP_NUMBER_TYPE)>
+ - value: 1073741824.0
+0x29f500000515: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: HEAP_NUMBER_TYPE
+ - instance size: 12
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- oddballs ---
+DebugPrint: 0x29f50000002d: [Oddball] in ReadOnlySpace: #null
+0x29f5000004c5: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: ODDBALL_TYPE
+ - instance size: 28
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - undetectable
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+DebugPrint: 0x29f500000011: [Oddball] in ReadOnlySpace: #undefined
+0x29f50000049d: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: ODDBALL_TYPE
+ - instance size: 28
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - undetectable
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+DebugPrint: 0x29f500000071: [Oddball] in ReadOnlySpace: #true
+0x29f5000004ed: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: ODDBALL_TYPE
+ - instance size: 28
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+DebugPrint: 0x29f500000055: [Oddball] in ReadOnlySpace: #false
+0x29f5000004ed: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: ODDBALL_TYPE
+ - instance size: 28
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.3 MAPS — same construction shares a Map ========
+HaveSameMap(a,b) = true
+HaveSameMap(a,c) = false
+--- a {x} ---
+DebugPrint: 0x29f50104da05: [JS_OBJECT_TYPE]
+ - map: 0x29f50102bcb9 <Map[28](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f50000351d: [String] in ReadOnlySpace: #x: 1 (const data field 3, in-obj, attrs: [WEC])
+ }
+0x29f50102bcb9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 28
+ - inobject properties: 4
+ - unused property fields: 3
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f5010119fd <Map[28](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f50102bd05 <Cell value= [weak] 0x29f501010cb5 <NativeContext[310]>>
+ - instance descriptors (own) #1: 0x29f50104da39 <DescriptorArray[1]>
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - constructor: 0x29f5010116f1 <JSFunction Object (sfi = 0x29f50043498d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- c {y,x} ---
+DebugPrint: 0x29f50104da89: [JS_OBJECT_TYPE]
+ - map: 0x29f50102bd35 <Map[28](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f50000352d: [String] in ReadOnlySpace: #y: 1 (const data field 3, in-obj, attrs: [WEC])
+    0x29f50000351d: [String] in ReadOnlySpace: #x: 1 (const data field 4, in-obj, attrs: [WEC])
+ }
+0x29f50102bd35: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 28
+ - inobject properties: 4
+ - unused property fields: 2
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50102bd0d <Map[28](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f50102bd05 <Cell value= [weak] 0x29f501010cb5 <NativeContext[310]>>
+ - instance descriptors (own) #2: 0x29f50104dad9 <DescriptorArray[2]>
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - constructor: 0x29f5010116f1 <JSFunction Object (sfi = 0x29f50043498d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.5 REPRESENTATION GENERALIZATION ========
+--- Point Smi field ---
+DebugPrint: 0x29f50104dbf1: [JS_OBJECT_TYPE]
+ - map: 0x29f50102be9d <Map[48](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50104db69 <Object map = 0x29f50102be75>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f50000351d: [String] in ReadOnlySpace: #x: 1 (const data field 3, in-obj, attrs: [WEC])
+ }
+0x29f50102be9d: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 48
+ - inobject properties: 9
+ - unused property fields: 8
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50102bda1 <Map[48](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f50102bec5 <Cell value= [weak] 0x29f501010cb5 <NativeContext[310]>>
+ - instance descriptors (own) #1: 0x29f50104dc49 <DescriptorArray[1]>
+ - prototype: 0x29f50104db69 <Object map = 0x29f50102be75>
+ - constructor: 0x29f50102ba89 <JSFunction Point (sfi = 0x29f50102b4a1)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 6
+
+--- Point after storing double (generalize Smi -> Double/Tagged) ---
+DebugPrint: 0x29f50104dbf1: [JS_OBJECT_TYPE]
+ - map: 0x29f50102becd <Map[48](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50104db69 <Object map = 0x29f50102be75>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f500000f59 <PropertyArray[0]>
+ - All own properties (excluding elements): {
+    0x29f50000351d: [String] in ReadOnlySpace: #x: 0x29f50104dcc5 <HeapNumber 1.5> (data field 3, in-obj, attrs: [WEC])
+ }
+0x29f50102becd: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 48
+ - inobject properties: 9
+ - unused property fields: 8
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50102bda1 <Map[48](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #1: 0x29f50104dc7d <DescriptorArray[1]>
+ - prototype: 0x29f50104db69 <Object map = 0x29f50102be75>
+ - constructor: 0x29f50102ba89 <JSFunction Point (sfi = 0x29f50102b4a1)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 6
+
+--- new Point after generalization (should not share deprecated map) ---
+HaveSameMap(p1,p2) = true
+DebugPrint: 0x29f50104dcd1: [JS_OBJECT_TYPE]
+ - map: 0x29f50102becd <Map[48](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50104db69 <Object map = 0x29f50102be75>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f50000351d: [String] in ReadOnlySpace: #x: 0x29f50104dd01 <HeapNumber 2.0> (data field 3, in-obj, attrs: [WEC])
+ }
+0x29f50102becd: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 48
+ - inobject properties: 9
+ - unused property fields: 8
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50102bda1 <Map[48](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f50102bec5 <Cell value= [weak] 0x29f501010cb5 <NativeContext[310]>>
+ - instance descriptors (own) #1: 0x29f50104dc7d <DescriptorArray[1]>
+ - prototype: 0x29f50104db69 <Object map = 0x29f50102be75>
+ - constructor: 0x29f50102ba89 <JSFunction Point (sfi = 0x29f50102b4a1)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 6
+
+
+======== 1.7 SLACK TRACKING — constructor instance size ========
+--- first Slacky ---
+DebugPrint: 0x29f50104de49: [JS_OBJECT_TYPE]
+ - map: 0x29f50102bfd9 <Map[48](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50104dddd <Object map = 0x29f50102bfb1>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f5000033ad: [String] in ReadOnlySpace: #a: 1 (const data field 3, in-obj, attrs: [WEC])
+ }
+0x29f50102bfd9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 48
+ - inobject properties: 9
+ - unused property fields: 8
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50102bf39 <Map[48](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f50102c001 <Cell value= [weak] 0x29f501010cb5 <NativeContext[310]>>
+ - instance descriptors (own) #1: 0x29f50104dea1 <DescriptorArray[1]>
+ - prototype: 0x29f50104dddd <Object map = 0x29f50102bfb1>
+ - constructor: 0x29f50102babd <JSFunction Slacky (sfi = 0x29f50102b4d1)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 6
+
+--- Slacky after 20+ instantiations ---
+DebugPrint: 0x29f50104e0d5: [JS_OBJECT_TYPE]
+ - map: 0x29f50102bfd9 <Map[16](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50104dddd <Object map = 0x29f50102bfb1>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f5000033ad: [String] in ReadOnlySpace: #a: 1 (const data field 3, in-obj, attrs: [WEC])
+ }
+0x29f50102bfd9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 16
+ - inobject properties: 1
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50102bf39 <Map[16](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f50102c001 <Cell value= [weak] 0x29f501010cb5 <NativeContext[310]>>
+ - instance descriptors (own) #1: 0x29f50104dea1 <DescriptorArray[1]>
+ - prototype: 0x29f50104dddd <Object map = 0x29f50102bfb1>
+ - constructor: 0x29f50102babd <JSFunction Slacky (sfi = 0x29f50102b4d1)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.8 DICTIONARY MODE three ways ========
+delete property HasFastProperties= false
+DebugPrint: 0x29f50104e1dd: [JS_OBJECT_TYPE]
+ - map: 0x29f501024839 <Map[12](HOLEY_ELEMENTS)> [DictionaryProperties]
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - properties: 0x29f50104e20d <NameDictionary[30]>
+ - All own properties (excluding elements): {
+   a: 1 (data, dict_index: 1, attrs: [WEC])
+   c: 3 (data, dict_index: 3, attrs: [WEC])
+ }
+0x29f501024839: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_OBJECT_TYPE
+ - instance size: 12
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - dictionary_map
+ - may_have_interesting_properties
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - constructor: 0x29f5010116f1 <JSFunction Object (sfi = 0x29f50043498d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+many properties HasFastProperties= false
+delete last own property HasFastProperties= false
+
+======== 1.9 ELEMENTS KINDS lattice ========
+--- PACKED_SMI ---
+DebugPrint: 0x29f501052d1d: [JSArray]
+ - map: 0x29f501018bc9 <Map[16](PACKED_SMI_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f50102b6f9 <FixedArray[3]> [PACKED_SMI_ELEMENTS (COW)]
+ - length: 3
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f50102b6f9 <FixedArray[3]> {
+           0: 1
+           1: 2
+           2: 3
+ }
+0x29f501018bc9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: PACKED_SMI_ELEMENTS
+ - enum length: invalid
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors #1: 0x29f501019209 <DescriptorArray[1]>
+ - transitions #1: 0x29f501019225 <TransitionArray[5]>
+   Transitions #1:
+     0x29f500000ed5 <Symbol: (elements_transition_symbol)>: (transition to HOLEY_SMI_ELEMENTS) -> 0x29f501019241 <Map[16](HOLEY_SMI_ELEMENTS)>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- PACKED_DOUBLE ---
+DebugPrint: 0x29f501052d4d: [JSArray]
+ - map: 0x29f501019285 <Map[16](PACKED_DOUBLE_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f501052d2d <FixedDoubleArray[3]> [PACKED_DOUBLE_ELEMENTS]
+ - length: 3
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f501052d2d <FixedDoubleArray[3]> {
+           0: 1 (0x3ff0000000000000)
+           1: 2 (0x4000000000000000)
+           2: 3.5 (0x400c000000000000)
+ }
+0x29f501019285: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: PACKED_DOUBLE_ELEMENTS
+ - enum length: invalid
+ - back pointer: 0x29f501019241 <Map[16](HOLEY_SMI_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors #1: 0x29f501019209 <DescriptorArray[1]>
+ - transitions #1: 0x29f5010192ad <TransitionArray[5]>
+   Transitions #1:
+     0x29f500000ed5 <Symbol: (elements_transition_symbol)>: (transition to HOLEY_DOUBLE_ELEMENTS) -> 0x29f5010192c9 <Map[16](HOLEY_DOUBLE_ELEMENTS)>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- PACKED (tagged) ---
+DebugPrint: 0x29f501052d5d: [JSArray]
+ - map: 0x29f50101930d <Map[16](PACKED_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f50102b745 <FixedArray[3]> [PACKED_ELEMENTS (COW)]
+ - length: 3
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f50102b745 <FixedArray[3]> {
+           0: 1
+           1: 2
+           2: 0x29f50000351d <String[1]: #x>
+ }
+0x29f50101930d: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: PACKED_ELEMENTS
+ - enum length: invalid
+ - back pointer: 0x29f5010192c9 <Map[16](HOLEY_DOUBLE_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors #1: 0x29f501019209 <DescriptorArray[1]>
+ - transitions #1: 0x29f501019335 <TransitionArray[5]>
+   Transitions #1:
+     0x29f500000ed5 <Symbol: (elements_transition_symbol)>: (transition to HOLEY_ELEMENTS) -> 0x29f501019351 <Map[16](HOLEY_ELEMENTS)>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- HOLEY_SMI ---
+DebugPrint: 0x29f501052d6d: [JSArray]
+ - map: 0x29f501019241 <Map[16](HOLEY_SMI_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f50102b765 <FixedArray[3]> [HOLEY_SMI_ELEMENTS (COW)]
+ - length: 3
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f50102b765 <FixedArray[3]> {
+           0: 1
+           1: 0x29f50002fffd <the_hole_value>
+           2: 3
+ }
+0x29f501019241: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_SMI_ELEMENTS
+ - enum length: invalid
+ - back pointer: 0x29f501018bc9 <Map[16](PACKED_SMI_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors #1: 0x29f501019209 <DescriptorArray[1]>
+ - transitions #1: 0x29f501019269 <TransitionArray[5]>
+   Transitions #1:
+     0x29f500000ed5 <Symbol: (elements_transition_symbol)>: (transition to PACKED_DOUBLE_ELEMENTS) -> 0x29f501019285 <Map[16](PACKED_DOUBLE_ELEMENTS)>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- HOLEY_DOUBLE ---
+DebugPrint: 0x29f501052d9d: [JSArray]
+ - map: 0x29f5010192c9 <Map[16](HOLEY_DOUBLE_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f501052d7d <FixedDoubleArray[3]> [HOLEY_DOUBLE_ELEMENTS]
+ - length: 3
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f501052d7d <FixedDoubleArray[3]> {
+           0: 1.5 (0x3ff8000000000000)
+           1: <the_hole>
+           2: 3.5 (0x400c000000000000)
+ }
+0x29f5010192c9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_DOUBLE_ELEMENTS
+ - enum length: invalid
+ - back pointer: 0x29f501019285 <Map[16](PACKED_DOUBLE_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors #1: 0x29f501019209 <DescriptorArray[1]>
+ - transitions #1: 0x29f5010192f1 <TransitionArray[5]>
+   Transitions #1:
+     0x29f500000ed5 <Symbol: (elements_transition_symbol)>: (transition to PACKED_ELEMENTS) -> 0x29f50101930d <Map[16](PACKED_ELEMENTS)>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- HOLEY (tagged) ---
+DebugPrint: 0x29f501052dad: [JSArray]
+ - map: 0x29f501019351 <Map[16](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f50102b7b1 <FixedArray[3]> [HOLEY_ELEMENTS (COW)]
+ - length: 3
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f50102b7b1 <FixedArray[3]> {
+           0: 1
+           1: 0x29f50002fffd <the_hole_value>
+           2: 0x29f50000351d <String[1]: #x>
+ }
+0x29f501019351: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f50101930d <Map[16](PACKED_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #1: 0x29f501019209 <DescriptorArray[1]>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- DICTIONARY (sparse) ---
+DebugPrint: 0x29f501052dbd: [JSArray]
+ - map: 0x29f50102d289 <Map[16](DICTIONARY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - elements: 0x29f501052de5 <NumberDictionary[16]> [DICTIONARY_ELEMENTS]
+ - length: 10001
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400aed <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - elements: 0x29f501052de5 <NumberDictionary[16]> {
+   10000: 1 (data, dict_index: 0, attrs: [WEC])
+ }
+0x29f50102d289: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_TYPE
+ - instance size: 16
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: DICTIONARY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f501019351 <Map[16](HOLEY_ELEMENTS)>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #1: 0x29f501019209 <DescriptorArray[1]>
+ - prototype: 0x29f501018bf1 <JSArray[0]>
+ - constructor: 0x29f501018b19 <JSFunction Array (sfi = 0x29f50043549d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- UINT8 ---
+DebugPrint: 0x29f501052e6d: [JSTypedArray]
+ - map: 0x29f5010196d9 <Map[60](UINT8ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501019779 <Object map = 0x29f501028a15>
+ - elements: 0x29f501052e61 <ByteArray[4]> [UINT8ELEMENTS]
+ - cpp_heap_wrappable: 0
+ - buffer: 0x29f501052e2d <ArrayBuffer map = 0x29f50101cf9d>
+ - byte_offset: 0
+ - byte_length: 4
+ - length: 4
+ - data_ptr: 0x29f501052e68
+   - base_pointer: 0x1052e61
+   - external_pointer: 0x29f500000007
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {}
+ - elements: 0x29f501052e61 <ByteArray[4]> {
+         0-3: 0
+ }
+0x29f5010196d9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_TYPED_ARRAY_TYPE
+ - instance size: 60
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: UINT8ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f501019779 <Object map = 0x29f501028a15>
+ - constructor: 0x29f5010196a5 <JSFunction Uint8Array (sfi = 0x29f50043a83d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.10 HOLES — holey array prototype lookup ========
+holey[1] (proto) = from-proto
+1 in holey = true
+
+======== 1.11 STRINGS ========
+--- seq one-byte ---
+DebugPrint: 0x29f50102ae91: [String] in OldSpace: #hello
+0x29f500000155: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: INTERNALIZED_ONE_BYTE_STRING_TYPE
+ - instance size: variable
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- seq two-byte ---
+DebugPrint: 0x29f50102aebd: [String] in OldSpace: u#h\xe9llo\ud83d\udd25
+0x29f50000012d: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: INTERNALIZED_TWO_BYTE_STRING_TYPE
+ - instance size: variable
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- likely ConsString (long concat) ---
+DebugPrint: 0x29f501053065: [String]: c"aaaabbbbccccddddeeeeffffaaaabbbbccccddddeeeeffffaaaabbbbccccddddeeeeffffaaaabbbbccccddddeeeeffff"
+0x29f500000385: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: CONS_ONE_BYTE_STRING_TYPE
+ - instance size: 20
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- likely SlicedString ---
+DebugPrint: 0x29f5010530e5: [String]: "aabbbbccccddddeeeeffffaaaabbbbccccddddeeeeffffaaaabbbbccccddddeeeeffffaaaabbbbccccddddeeeeff"
+0x29f5000003d5: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: SLICED_ONE_BYTE_STRING_TYPE
+ - instance size: 20
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- internalized (property key) ---
+DebugPrint: 0x29f50102afbd: [String] in OldSpace: #propkey
+0x29f500000155: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: INTERNALIZED_ONE_BYTE_STRING_TYPE
+ - instance size: variable
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.13 NUMBERS ========
+Max Smi-ish 2^30-1 DebugPrint:
+DebugPrint: Smi: 0x3fffffff (1073741823)
+
+2^30 (must box):
+DebugPrint: 0x29f50102b7fd: [HeapNumber] in OldSpace
+ - map: 0x29f500000515 <Map[12](HEAP_NUMBER_TYPE)>
+ - value: 1073741824.0
+0x29f500000515: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: HEAP_NUMBER_TYPE
+ - instance size: 12
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+-0 HeapNumber:
+DebugPrint: 0x29f50102b82d: [HeapNumber] in OldSpace
+ - map: 0x29f500000515 <Map[12](HEAP_NUMBER_TYPE)>
+ - value: -0.0
+0x29f500000515: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: HEAP_NUMBER_TYPE
+ - instance size: 12
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+NaN:
+DebugPrint: 0x29f500000f6d: [HeapNumber] in ReadOnlySpace
+ - map: 0x29f500000515 <Map[12](HEAP_NUMBER_TYPE)>
+ - value: nan (0x7ff8000000000000)
+0x29f500000515: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: HEAP_NUMBER_TYPE
+ - instance size: 12
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+Infinity:
+DebugPrint: 0x29f500000f91: [HeapNumber] in ReadOnlySpace
+ - map: 0x29f500000515 <Map[12](HEAP_NUMBER_TYPE)>
+ - value: inf
+0x29f500000515: [Map] in ReadOnlySpace
+ - map: 0x29f500000475 <MetaMap (0x29f50000002d <null>)>
+ - type: HEAP_NUMBER_TYPE
+ - instance size: 12
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - non-extensible
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50000002d <null>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.14 TYPED ARRAY / ARRAYBUFFER ========
+--- ArrayBuffer ---
+DebugPrint: 0x29f501053235: [JSArrayBuffer]
+ - map: 0x29f50101cf9d <Map[52](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50101d13d <Object map = 0x29f50101cfc5>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - cpp_heap_wrappable: 0
+ - backing_store: 0x29f800010000
+ - byte_length: 16
+ - max_byte_length: 16
+ - detach key: (undefined)
+ - views: [weak] 0x29f501053281 <Uint8Array map = 0x29f5010196d9>
+ - detachable
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {}
+0x29f50101cf9d: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_BUFFER_TYPE
+ - instance size: 52
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50101d13d <Object map = 0x29f50101cfc5>
+ - constructor: 0x29f50101cf4d <JSFunction ArrayBuffer (sfi = 0x29f500439aed)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- Uint8Array ---
+DebugPrint: 0x29f501053281: [JSTypedArray]
+ - map: 0x29f5010196d9 <Map[60](UINT8ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501019779 <Object map = 0x29f501028a15>
+ - elements: 0x29f500000f39 <ByteArray[0]> [UINT8ELEMENTS]
+ - cpp_heap_wrappable: 0
+ - buffer: 0x29f501053235 <ArrayBuffer map = 0x29f50101cf9d>
+ - byte_offset: 0
+ - byte_length: 16
+ - length: 16
+ - data_ptr: 0x29f800010000
+   - base_pointer: 0
+   - external_pointer: 0x29f800010000
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {}
+ - elements: 0x29f500000f39 <ByteArray[0]> {
+        0-15: 0
+ }
+0x29f5010196d9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_TYPED_ARRAY_TYPE
+ - instance size: 60
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: UINT8ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f501019779 <Object map = 0x29f501028a15>
+ - constructor: 0x29f5010196a5 <JSFunction Uint8Array (sfi = 0x29f50043a83d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- resizable ArrayBuffer ---
+DebugPrint: 0x29f501053301: [JSArrayBuffer]
+ - map: 0x29f50101cf9d <Map[52](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f50101d13d <Object map = 0x29f50101cfc5>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - cpp_heap_wrappable: 0
+ - backing_store: 0x29f600000000
+ - byte_length: 8
+ - max_byte_length: 16
+ - detach key: (undefined)
+ - views: (no views)
+ - detachable
+ - resizable_by_js
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {}
+0x29f50101cf9d: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_BUFFER_TYPE
+ - instance size: 52
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50101d13d <Object map = 0x29f50101cfc5>
+ - constructor: 0x29f50101cf4d <JSFunction ArrayBuffer (sfi = 0x29f500439aed)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- SharedArrayBuffer ---
+DebugPrint: 0x29f501053335: [JSArrayBuffer]
+ - map: 0x29f501021561 <Map[52](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f5010216b5 <Object map = 0x29f501021589>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - cpp_heap_wrappable: 0
+ - backing_store: 0x29f800010020
+ - byte_length: 8
+ - max_byte_length: 8
+ - detach key: (undefined)
+ - views: (no views)
+ - shared
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {}
+0x29f501021561: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARRAY_BUFFER_TYPE
+ - instance size: 52
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f5010216b5 <Object map = 0x29f501021589>
+ - constructor: 0x29f50102152d <JSFunction SharedArrayBuffer (sfi = 0x29f500439d2d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+
+======== 1.15 EXOTICS ========
+--- JSProxy ---
+DebugPrint: 0x29f501053449: [JSProxy]
+ - map: 0x29f501020fb1 <Map[20](JS_PROXY_TYPE)>
+ - target: 0x29f5010533f1 <Object map = 0x29f50102d3b1>
+ - handler: 0x29f50105341d <Object map = 0x29f50102d40d>
+0x29f501020fb1: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_PROXY_TYPE
+ - instance size: 20
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - dictionary_map
+ - may_have_interesting_properties
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0
+ - instance descriptors (own) #0: 0x29f50000080d <DescriptorArray[0]>
+ - prototype: 0x29f50000002d <null>
+ - constructor: 0x29f50101a7f5 <JSFunction Proxy (sfi = 0x29f50043bb2d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- bound function ---
+DebugPrint: 0x29f501053481: [JSBoundFunction]
+ - map: 0x29f50101da29 <Map[24](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f5010114e1 <JSFunction (sfi = 0x29f50100dd89)>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - bound_target_function: 0x29f50102bb8d <JSFunction boundTarget (sfi = 0x29f50102b591)>
+ - bound_this: 0x29f50000002d <null>
+ - bound_arguments: 0x29f501053475 <FixedArray[1]>
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400b05 <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [__C])
+    0x29f500000e29: [String] in ReadOnlySpace: #name: 0x29f500400b1d <AccessorInfo name= 0x29f500000e29 <String[4]: #name>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [__C])
+ }
+0x29f50101da29: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_BOUND_FUNCTION_TYPE
+ - instance size: 24
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - callable
+ - constructor
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #2: 0x29f50101da51 <DescriptorArray[2]>
+ - prototype: 0x29f5010114e1 <JSFunction (sfi = 0x29f50100dd89)>
+ - constructor: 0x29f5010116f1 <JSFunction Object (sfi = 0x29f50043498d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- JSFunction ---
+DebugPrint: 0x29f50102bbc1: [Function] in OldSpace
+ - map: 0x29f5010113b9 <Map[32](HOLEY_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f5010114e1 <JSFunction (sfi = 0x29f50100dd89)>
+ - elements: 0x29f5000007e5 <FixedArray[0]> [HOLEY_ELEMENTS]
+ - function prototype: 
+ - initial_map: 
+ - shared_info: 0x29f50102b5c1 <SharedFunctionInfo fn>
+ - name: 0x29f50102b241 <String[2]: #fn>
+ - builtin: CompileLazy
+ - formal_parameter_count: 2
+ - kind: NormalFunction
+ - context: 0x29f50102b9ed <ScriptContext[24]>
+ - code: 0x29f500402e81 <Code BUILTIN CompileLazy>
+ - dispatch_handle: 0x135b00
+ - source code: (x) { return x+1; }
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 0x29f500400b4d <AccessorInfo name= 0x29f500000e39 <String[6]: #length>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [__C])
+    0x29f500000e29: [String] in ReadOnlySpace: #name: 0x29f500400b35 <AccessorInfo name= 0x29f500000e29 <String[4]: #name>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [__C])
+    0x29f500000e11: [String] in ReadOnlySpace: #prototype: 0x29f500400b65 <AccessorInfo name= 0x29f500000e11 <String[9]: #prototype>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W__])
+ }
+ - feedback vector: feedback metadata is not available in SFI
+0x29f5010113b9: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_FUNCTION_WITH_PROTOTYPE_TYPE
+ - instance size: 32
+ - inobject properties: 0
+ - unused property fields: 0
+ - elements kind: HOLEY_ELEMENTS
+ - enum length: invalid
+ - stable_map
+ - callable
+ - constructor
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #3: 0x29f5010113e1 <DescriptorArray[3]>
+ - prototype: 0x29f5010114e1 <JSFunction (sfi = 0x29f50100dd89)>
+ - constructor: 0x29f501011385 <JSFunction Function (sfi = 0x29f5004352bd)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+
+--- arguments ---
+DebugPrint: 0x29f5010534e5: [JS_ARGUMENTS_OBJECT_TYPE]
+ - map: 0x29f50101e231 <Map[20](PACKED_ELEMENTS)> [FastProperties]
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - elements: 0x29f5010534d1 <FixedArray[3]> [PACKED_ELEMENTS]
+ - properties: 0x29f5000007e5 <FixedArray[0]>
+ - All own properties (excluding elements): {
+    0x29f500000e39: [String] in ReadOnlySpace: #length: 3 (data field 3, in-obj, attrs: [W_C])
+    0x29f5000040b9: [String] in ReadOnlySpace: #callee: 0x29f5010534b1 <JSFunction argsObj (sfi = 0x29f50102b621)> (data field 4, in-obj, attrs: [W_C])
+    0x29f500005e9d <Symbol: Symbol.iterator>: 0x29f500400ad5 <AccessorInfo name= 0x29f500005e9d <Symbol: Symbol.iterator>, data= 0x29f500000011 <undefined>> (const accessor descriptor, attrs: [W_C])
+ }
+ - elements: 0x29f5010534d1 <FixedArray[3]> {
+           0: 1
+           1: 2
+           2: 3
+ }
+0x29f50101e231: [Map] in OldSpace
+ - map: 0x29f501010c65 <MetaMap (0x29f501010cb5 <NativeContext[310]>)>
+ - type: JS_ARGUMENTS_OBJECT_TYPE
+ - instance size: 20
+ - inobject properties: 2
+ - unused property fields: 0
+ - elements kind: PACKED_ELEMENTS
+ - enum length: invalid
+ - back pointer: 0x29f500000011 <undefined>
+ - prototype_validity_cell: 0x29f500000b15 <Cell value= [cleared]>
+ - instance descriptors (own) #3: 0x29f50101e259 <DescriptorArray[3]>
+ - prototype: 0x29f501011e51 <Object map = 0x29f5010111e9>
+ - constructor: 0x29f50101e211 <JSFunction Arguments (sfi = 0x29f50100df1d)>
+ - dependent code: 0x29f5000007f5 <Other heap object (WEAK_ARRAY_LIST_TYPE)>
+ - construction counter: 0
+

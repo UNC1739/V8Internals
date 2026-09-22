@@ -1,0 +1,103 @@
+--- after opt ---
+
+==== JS stack trace =========================================
+
+    0: ExitFrame [pc: 0x1778660dc]
+    1: StubFrame [pc: 0x177ea5374]
+    2: inner [0x1a540102a8f5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:3] [bytecode=0x169101000199 offset=0](this=0x1a5401010c55 <JSGlobalProxy>#0#)
+    3: hot [0x1a540102a929] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:~6] [pc=0x1700001b8](this=0x1a5401010c55 <JSGlobalProxy>#0#,2)
+    4: /* anonymous */ [0x1a540102a8a5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:15] [bytecode=0x1691010000b5 offset=62](this=0x1a5401010c55 <JSGlobalProxy>#0#)
+    5: InternalFrame [pc: 0x1774bee7c]
+    6: EntryFrame [pc: 0x1774beb5c]
+
+==== Details ================================================
+
+[0]: ExitFrame [pc: 0x1778660dc]
+[1]: StubFrame [pc: 0x177ea5374]
+[2]: inner [0x1a540102a8f5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:3] [bytecode=0x169101000199 offset=0](this=0x1a5401010c55 <JSGlobalProxy>#0#) {
+--------- s o u r c e   c o d e ---------
+function inner() {\x0a  %DebugTrace();\x0a  return 1;\x0a}
+-----------------------------------------
+}
+
+[3]: hot [0x1a540102a929] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:~6] [pc=0x1700001b8](this=0x1a5401010c55 <JSGlobalProxy>#0#,2) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function hot(n) {\x0a  let s = 0;\x0a  for (let i = 0; i < n; i++) s += inner();\x0a  return s;\x0a}
+-----------------------------------------
+}
+[4]: /* anonymous */ [0x1a540102a8a5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:15] [bytecode=0x1691010000b5 offset=62](this=0x1a5401010c55 <JSGlobalProxy>#0#) {
+  // expression stack (top to bottom)
+  [05] : 0x1a5401010c55 <JSGlobalProxy>#0#
+  [04] : 2
+  [03] : 2
+  [02] : 0x1a540102a929 <JSFunction hot (sfi = 0x1a540102a851)>#1#
+  [01] : 0x1a5401023dc9 <JSFunction print (sfi = 0x1a5401023d99)>#2#
+  [00] : 0x1a5400000011 <undefined>
+--------- s o u r c e   c o d e ---------
+// 4.6 / 0.3 \u2014 mixed stack via %DebugTrace (same printer as gdb jst).\x0afunction inner() {\x0a  %DebugTrace();\x0a  return 1;\x0a}\x0afunction hot(n) {\x0a  let s = 0;\x0a  for (let i = 0; i < n; i++) s += inner();\x0a  return s;\x0a}\x0a%PrepareFunctionForOptimization(hot);\x0ahot(2);\x0a%OptimizeFunctionOnNextCall(hot);\x0aprint('--- ...
+
+-----------------------------------------
+}
+
+[5]: InternalFrame [pc: 0x1774bee7c]
+[6]: EntryFrame [pc: 0x1774beb5c]
+-- ObjectCacheKey --
+
+ #0# 0x1a5401010c55: 0x1a5401010c55 <JSGlobalProxy>
+ #1# 0x1a540102a929: 0x1a540102a929 <JSFunction hot (sfi = 0x1a540102a851)>
+ #2# 0x1a5401023dc9: 0x1a5401023dc9 <JSFunction print (sfi = 0x1a5401023d99)>
+=====================
+
+
+==== JS stack trace =========================================
+
+    0: ExitFrame [pc: 0x1778660dc]
+    1: StubFrame [pc: 0x177ea5374]
+    2: inner [0x1a540102a8f5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:3] [bytecode=0x169101000199 offset=0](this=0x1a5401010c55 <JSGlobalProxy>#0#)
+    3: hot [0x1a540102a929] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:~6] [pc=0x170000258](this=0x1a5401010c55 <JSGlobalProxy>#0#,2)
+    4: /* anonymous */ [0x1a540102a8a5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:15] [bytecode=0x1691010000b5 offset=62](this=0x1a5401010c55 <JSGlobalProxy>#0#)
+    5: InternalFrame [pc: 0x1774bee7c]
+    6: EntryFrame [pc: 0x1774beb5c]
+
+==== Details ================================================
+
+[0]: ExitFrame [pc: 0x1778660dc]
+[1]: StubFrame [pc: 0x177ea5374]
+[2]: inner [0x1a540102a8f5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:3] [bytecode=0x169101000199 offset=0](this=0x1a5401010c55 <JSGlobalProxy>#0#) {
+--------- s o u r c e   c o d e ---------
+function inner() {\x0a  %DebugTrace();\x0a  return 1;\x0a}
+-----------------------------------------
+}
+
+[3]: hot [0x1a540102a929] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:~6] [pc=0x170000258](this=0x1a5401010c55 <JSGlobalProxy>#0#,2) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function hot(n) {\x0a  let s = 0;\x0a  for (let i = 0; i < n; i++) s += inner();\x0a  return s;\x0a}
+-----------------------------------------
+}
+[4]: /* anonymous */ [0x1a540102a8a5] [/Users/adam/github/V8Pwn/notes/_proofs/04-debug-trace.js:15] [bytecode=0x1691010000b5 offset=62](this=0x1a5401010c55 <JSGlobalProxy>#0#) {
+  // expression stack (top to bottom)
+  [05] : 0x1a5401010c55 <JSGlobalProxy>#0#
+  [04] : 2
+  [03] : 2
+  [02] : 0x1a540102a929 <JSFunction hot (sfi = 0x1a540102a851)>#1#
+  [01] : 0x1a5401023dc9 <JSFunction print (sfi = 0x1a5401023d99)>#2#
+  [00] : 0x1a5400000011 <undefined>
+--------- s o u r c e   c o d e ---------
+// 4.6 / 0.3 \u2014 mixed stack via %DebugTrace (same printer as gdb jst).\x0afunction inner() {\x0a  %DebugTrace();\x0a  return 1;\x0a}\x0afunction hot(n) {\x0a  let s = 0;\x0a  for (let i = 0; i < n; i++) s += inner();\x0a  return s;\x0a}\x0a%PrepareFunctionForOptimization(hot);\x0ahot(2);\x0a%OptimizeFunctionOnNextCall(hot);\x0aprint('--- ...
+
+-----------------------------------------
+}
+
+[5]: InternalFrame [pc: 0x1774bee7c]
+[6]: EntryFrame [pc: 0x1774beb5c]
+-- ObjectCacheKey --
+
+ #0# 0x1a5401010c55: 0x1a5401010c55 <JSGlobalProxy>
+ #1# 0x1a540102a929: 0x1a540102a929 <JSFunction hot (sfi = 0x1a540102a851)>
+ #2# 0x1a5401023dc9: 0x1a5401023dc9 <JSFunction print (sfi = 0x1a5401023d99)>
+=====================
+
+2
+status 41

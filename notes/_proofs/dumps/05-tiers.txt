@@ -1,0 +1,27 @@
+V8 is running with developer-only features enabled. Stability and security will suffer.
+add 1+2 3
+add 1+2 3
+[manually marking 0x23090102a981 <JSFunction add (sfi = 0x23090102a8a1)> for optimization to TURBOFAN_JS, ConcurrencyMode::kSynchronous]
+[compiling method 0x23090102a981 <JSFunction add (sfi = 0x23090102a8a1)> (target TURBOFAN_JS), mode: ConcurrencyMode::kSynchronous]
+[completed compiling 0x23090102a981 <JSFunction add (sfi = 0x23090102a8a1)> (target TURBOFAN_JS) - took 0.680, 22.222, 0.325 ms]
+add after opt 3
+--- deopt: string ---
+[bailout (kind: deopt-eager, reason: not a Smi): begin. deoptimizing 0x23090102a981 <JSFunction add (sfi = 0x23090102a8a1)>, 0x3e77010003c5 <Code TURBOFAN_JS>, opt id 0, node id 36, bytecode offset 2, deopt exit 0, FP to SP delta 32, caller SP 0x00016d14dad8, pc 0x00015000038c]
+add after string x1
+[marking 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> for optimization to MAGLEV, ConcurrencyMode::kConcurrent, reason: hot and stable]
+[compiling method 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target MAGLEV) OSR, mode: ConcurrencyMode::kConcurrent]
+[completed compiling 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target MAGLEV) OSR - took 0.001, 1.494, 0.002 ms]
+[compiling method 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target TURBOFAN_JS) OSR, mode: ConcurrencyMode::kConcurrent]
+[bailout (kind: deopt-eager, reason: not a Smi): begin. deoptimizing 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)>, 0x3e770104048d <Code MAGLEV>, opt id 1, node id 0, bytecode offset 6, deopt exit 6, FP to SP delta 96, caller SP 0x00016d14dae0, pc 0x0001500410b4]
+[completed compiling 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target TURBOFAN_JS) OSR - took 0.004, 2.889, 0.014 ms]
+[completed optimizing 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target TURBOFAN_JS) OSR]
+[marking 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> for optimization to MAGLEV, ConcurrencyMode::kConcurrent, reason: hot and stable]
+[bailout (kind: deopt-eager, reason: not a Smi): begin. deoptimizing 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)>, 0x3e77010008bd <Code TURBOFAN_JS>, opt id 2, node id 45, bytecode offset 4, deopt exit 2, FP to SP delta 112, caller SP 0x00016d14dae0, pc 0x00015000085c]
+[marking 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> for optimization to MAGLEV, ConcurrencyMode::kConcurrent, reason: hot and stable]
+[compiling method 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target MAGLEV) OSR, mode: ConcurrencyMode::kConcurrent]
+hotLoop 4999950000
+[completed compiling 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target MAGLEV) OSR - took 0.000, 1.397, 0.001 ms]
+[marking 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> for optimization to MAGLEV, ConcurrencyMode::kConcurrent, reason: hot and stable]
+[compiling method 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target TURBOFAN_JS) OSR, mode: ConcurrencyMode::kConcurrent]
+hotLoop again 4999950000
+[flushed compiling 0x23090102a9b5 <JSFunction hotLoop (sfi = 0x23090102a8d1)> (target TURBOFAN_JS) OSR]

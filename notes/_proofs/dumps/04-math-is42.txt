@@ -1,0 +1,20 @@
+# 4.3 — Math.is42 Torque builtin (throwaway on pin, then reverted)
+
+d8: build/checkouts/cohort/v8/out/teaching-debug.sandbox-on/d8
+pin: 15.3.76.13
+
+$ ./d8 -e 'print(Math.is42(42)); print(Math.is42(41)); print(Math.is42("42")); print(Math.is42(42.0)); print(typeof Math.is42)'
+true
+false
+true
+true
+function
+
+Torque must be `transitioning` because it calls ToNumber_Inline.
+Generated:
+  gen/torque-generated/builtin-definitions.h:
+    TFJ(MathIs42, JSParameterCount(1), kReceiver, kX)
+  gen/torque-generated/src/builtins/math-tq-csa.cc:
+    TF_BUILTIN(MathIs42, CodeStubAssembler)
+
+Sources reverted after this dump. Snapshot rebuild was required (mksnapshot + LINK d8).

@@ -1,0 +1,8 @@
+d8 --allow-natives-syntax --trace-deopt 08-debugger-enable.js
+(d8.debugger.enable(); then TurboFan hot(); then debugger;)
+
+status before 193   # kIsFunction | kInterpreted | kMarkedForOptimization
+[marking dependent code … <Code TURBOFAN_JS> … for deoptimization, reason: JS debugger attached]
+[bailout (kind: deopt-lazy, reason: (unknown)): begin. deoptimizing … <Code TURBOFAN_JS> … bytecode offset 29]
+45
+status after 65     # kIsFunction | kInterpreted

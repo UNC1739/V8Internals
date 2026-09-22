@@ -1,0 +1,33 @@
+# 4.8 — snapshot vs no-snapshot (pin 15.3.76.13, teaching-debug)
+
+This pin is V8_USE_EXTERNAL_STARTUP_DATA. There is no gn `v8_use_snapshot=false`;
+d8 always deserializes. The no-snapshot path is mksnapshot (snapshot-empty.cc +
+setup-isolate-full.cc): compile every builtin, then write the blob.
+
+## d8 with snapshot (steady)
+
+d8 -e 'print(1)' real: 0.05 0.05 0.05 0.05 0.05 s
+snapshot_blob.bin: 2.9 MiB
+
+--profile-deserialization:
+  checksum              2.164 ms
+  read-only 2764904 B   0.968 ms
+  isolate     83728 B   0.280 ms
+  context #0  48928 B   0.295 ms
+  deserialize total     ~3.7 ms   (process+ICU is the rest of the 50 ms)
+
+## d8 without snapshot_blob.bin
+
+Fatal error in src/api/api.cc:
+  Failed to deserialize the V8 snapshot blob.
+
+## mksnapshot (bootstrap, no prior snapshot)
+
+Same flags as ninja run_mksnapshot_default, writing to a temp dir
+(did not overwrite the pin blob).
+
+real 1.63 s   user 9.11 s   sys 0.81 s
+outputs: snapshot_blob.bin 2.9M, embedded.S 30M
+
+~30× wall / ~180× CPU vs d8 deserialize. Concurrent builtin generation
+(--concurrent-builtin-generation) is why user >> real.

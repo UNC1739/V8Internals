@@ -1,0 +1,41 @@
+V8 is running with developer-only features enabled. Stability and security will suffer.
+
+
+Start bytecode interpreter. Pattern /a(b+)c/ Subject 'abbbc'
+pc = 00, sp = 0, curpos = 0, curchar = 0000000a ..., PushBacktrack, label: dc
+pc = 08, sp = 1, curpos = 0, curchar = 0000000a ..., SkipUntilChar, cp_offset: 00, advance_by: 01, character: a, bounds_check_offset: 00, on_match: 1c, on_no_match: 1c
+pc = 1c, sp = 1, curpos = 0, curchar = 00000061 (a), Load2CurrentChars, cp_offset: 00, bounds_check_offset: 02, on_failure: e0
+pc = 28, sp = 1, curpos = 0, curchar = 00006261 ..., CheckCharacter, character: \u6261, on_equal: 38
+pc = 38, sp = 1, curpos = 0, curchar = 00006261 ..., PushCurrentPosition
+pc = 3c, sp = 2, curpos = 0, curchar = 00006261 ..., WriteCurrentPositionToRegister, register_index: 00, cp_offset: 00
+pc = 44, sp = 2, curpos = 0, curchar = 00006261 ..., WriteCurrentPositionToRegister, register_index: 02, cp_offset: 01
+pc = 4c, sp = 2, curpos = 0, curchar = 00006261 ..., AdvanceCurrentPosition, by: 02
+pc = 50, sp = 2, curpos = 2, curchar = 00006261 ..., PushBacktrack, label: ac
+pc = 58, sp = 3, curpos = 2, curchar = 00006261 ..., PushCurrentPosition
+pc = 5c, sp = 4, curpos = 2, curchar = 00006261 ..., LoadCurrentCharacter, cp_offset: 00, bounds_check_offset: 00, on_failure: 78
+pc = 68, sp = 4, curpos = 2, curchar = 00000062 (b), CheckNotCharacter, character: b, on_not_equal: 78
+pc = 70, sp = 4, curpos = 2, curchar = 00000062 (b), AdvanceCpAndGoto, by: 01, on_goto: 5c
+pc = 5c, sp = 4, curpos = 3, curchar = 00000062 (b), LoadCurrentCharacter, cp_offset: 00, bounds_check_offset: 00, on_failure: 78
+pc = 68, sp = 4, curpos = 3, curchar = 00000062 (b), CheckNotCharacter, character: b, on_not_equal: 78
+pc = 70, sp = 4, curpos = 3, curchar = 00000062 (b), AdvanceCpAndGoto, by: 01, on_goto: 5c
+pc = 5c, sp = 4, curpos = 4, curchar = 00000062 (b), LoadCurrentCharacter, cp_offset: 00, bounds_check_offset: 00, on_failure: 78
+pc = 68, sp = 4, curpos = 4, curchar = 00000063 (c), CheckNotCharacter, character: b, on_not_equal: 78
+pc = 78, sp = 4, curpos = 4, curchar = 00000063 (c), LoadCurrentCharacter, cp_offset: 00, bounds_check_offset: 00, on_failure: a0
+pc = 84, sp = 4, curpos = 4, curchar = 00000063 (c), CheckNotCharacter, character: c, on_not_equal: a0
+pc = 8c, sp = 4, curpos = 4, curchar = 00000063 (c), WriteCurrentPositionToRegister, register_index: 01, cp_offset: 01
+pc = 94, sp = 4, curpos = 4, curchar = 00000063 (c), WriteCurrentPositionToRegister, register_index: 03, cp_offset: 00
+pc = 9c, sp = 4, curpos = 4, curchar = 00000063 (c), Succeed
+match abbbc,bbb
+
+
+Start bytecode interpreter. Pattern /a(b+)c/ Subject 'axc'
+pc = 00, sp = 0, curpos = 0, curchar = 0000000a ..., PushBacktrack, label: dc
+pc = 08, sp = 1, curpos = 0, curchar = 0000000a ..., SkipUntilChar, cp_offset: 00, advance_by: 01, character: a, bounds_check_offset: 00, on_match: 1c, on_no_match: 1c
+pc = 1c, sp = 1, curpos = 0, curchar = 00000061 (a), Load2CurrentChars, cp_offset: 00, bounds_check_offset: 02, on_failure: e0
+pc = 28, sp = 1, curpos = 0, curchar = 00007861 ..., CheckCharacter, character: \u6261, on_equal: 38
+pc = 30, sp = 1, curpos = 0, curchar = 00007861 ..., AdvanceCpAndGoto, by: 01, on_goto: 08
+pc = 08, sp = 1, curpos = 1, curchar = 00007861 ..., SkipUntilChar, cp_offset: 00, advance_by: 01, character: a, bounds_check_offset: 00, on_match: 1c, on_no_match: 1c
+pc = 1c, sp = 1, curpos = 3, curchar = 00000063 (c), Load2CurrentChars, cp_offset: 00, bounds_check_offset: 02, on_failure: e0
+pc = e0, sp = 1, curpos = 3, curchar = 00000063 (c), Backtrack, return_code: 00
+pc = dc, sp = 0, curpos = 3, curchar = 00000063 (c), Fail
+fail null

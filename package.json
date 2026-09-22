@@ -1,0 +1,12 @@
+{
+  "name": "v8-internals",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs"
+  },
+  "dependencies": {
+    "marked": "^18.0.13"
+  }
+}
