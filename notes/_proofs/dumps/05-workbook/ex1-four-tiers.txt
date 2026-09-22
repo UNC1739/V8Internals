@@ -1,0 +1,12 @@
+1. after first call        : Ignition
+[compiling method 0x3e0b0102a925 <SharedFunctionInfo work> (target BASELINE)]
+[completed compiling 0x3e0b0102a925 <SharedFunctionInfo work> (target BASELINE) - took 1.729 ms]
+2. after %CompileBaseline  : Sparkplug
+[manually marking 0x3e0b0102aa01 <JSFunction work (sfi = 0x3e0b0102a925)> for optimization to MAGLEV, ConcurrencyMode::kSynchronous]
+[compiling method 0x3e0b0102aa01 <JSFunction work (sfi = 0x3e0b0102a925)> (target MAGLEV), mode: ConcurrencyMode::kSynchronous]
+[completed compiling 0x3e0b0102aa01 <JSFunction work (sfi = 0x3e0b0102a925)> (target MAGLEV) - took 0.000, 14.398, 0.113 ms]
+3. after Maglev on next    : Maglev
+[manually marking 0x3e0b0102aa01 <JSFunction work (sfi = 0x3e0b0102a925)> for optimization to TURBOFAN_JS, ConcurrencyMode::kSynchronous]
+[compiling method 0x3e0b0102aa01 <JSFunction work (sfi = 0x3e0b0102a925)> (target TURBOFAN_JS), mode: ConcurrencyMode::kSynchronous]
+[completed compiling 0x3e0b0102aa01 <JSFunction work (sfi = 0x3e0b0102a925)> (target TURBOFAN_JS) - took 0.207, 16.347, 0.023 ms]
+4. after TurboFan on next  : TurboFan

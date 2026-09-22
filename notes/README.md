@@ -21,7 +21,9 @@ Convention: a note is done when a dump in `_proofs/dumps/` shows the claim. Sour
 | [02-property-access.md](02-property-access.md) | 2 — LookupIterator, ICs, feedback, handlers, globals |
 | [03-parsing-bytecode.md](03-parsing-bytecode.md) | 3 — parser, Ignition ISA, desugaring, generators |
 | [04-builtins-runtime.md](04-builtins-runtime.md) | 4 — Torque/CSA/C++/ASM, frames, isolate, snapshot |
+| [05-jit-and-tiers.md](05-jit-and-tiers.md) | 5 — **primer:** JIT design theory + a dedicated section per tier |
 | [05-compiler-tiers.md](05-compiler-tiers.md) | 5 — Ignition → Sparkplug → Maglev → TurboFan/Turboshaft, deopt, OSR |
+| [05-compiler-tiers-workbook.md](05-compiler-tiers-workbook.md) | 5 — **workbook:** 7 predict→run→check experiments (+ [quiz](05-quiz.html)) |
 | [06-memory.md](06-memory.md) | 6 — spaces, scavenger, mark-compact, write barriers, handles |
 | [07-wasm.md](07-wasm.md) | 7 — Liftoff / Turboshaft, object model, JS boundary |
 | [08-long-tail.md](08-long-tail.md) | 8 — Irregexp, promises, inspector, sandbox-as-architecture |

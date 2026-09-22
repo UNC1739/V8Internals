@@ -1,0 +1,7 @@
+### --trace-turbo-escape (the temporary object becomes virtual)
+Reducing Allocate#81
+Creating VirtualObject id:0 size:20
+
+### generated code size for dist2()  (--print-opt-code)
+escape ON  : Instructions (size = 908)
+escape OFF : Instructions (size = 1984)

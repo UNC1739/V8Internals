@@ -17,7 +17,9 @@ const PAGES = [
   { id: "03-parse", file: "03-parsing-bytecode.md", title: "3 — Parse / bytecode" },
   { id: "04-builtins", file: "04-builtins-runtime.md", title: "4 — Builtins / runtime" },
   { id: "04-torque", file: "04-torque-builtin.md", title: "4.3 — Torque builtin" },
+  { id: "05-jit", file: "05-jit-and-tiers.md", title: "5 — JIT & tiers (primer)" },
   { id: "05-tiers", file: "05-compiler-tiers.md", title: "5 — Compiler tiers" },
+  { id: "05-workbook", file: "05-compiler-tiers-workbook.md", title: "5 — Workbook (hands-on)" },
   { id: "06-memory", file: "06-memory.md", title: "6 — Memory / GC" },
   { id: "07-wasm", file: "07-wasm.md", title: "7 — Wasm" },
   { id: "08-tail", file: "08-long-tail.md", title: "8 — Long tail" },
@@ -135,7 +137,7 @@ async function load() {
         a.href = "#" + page.id;
         return;
       }
-      if (href.endsWith(".md") || href.startsWith("_proofs/") || href.startsWith("embedder/")) {
+      if (href.endsWith(".md") || href.endsWith(".html") || href.startsWith("_proofs/") || href.startsWith("embedder/")) {
         a.href = "/raw/" + href;
       }
     });
@@ -159,6 +161,7 @@ const MIME = {
   ".js": "text/plain; charset=utf-8",
   ".cc": "text/plain; charset=utf-8",
   ".h": "text/plain; charset=utf-8",
+  ".html": "text/html; charset=utf-8",
 };
 
 const server = createServer(async (req, res) => {

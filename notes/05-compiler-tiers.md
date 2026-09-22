@@ -2,6 +2,11 @@
 
 Dump: `notes/_proofs/dumps/05-tiers.txt`. Course facts: `research/FACTS.md` §1.1–1.2.
 
+**Companions:** [JIT design + per-tier primer](05-jit-and-tiers.md) (the theory and a dedicated
+section per tier) · [hands-on workbook](05-compiler-tiers-workbook.md) (seven predict-then-run
+experiments) · [self-check quiz](05-quiz.html). Read the primer first if the tier ladder is new;
+this note stays as the terse reference next to the source.
+
 ## 5.1 The ladder
 
 Default JS on this pin:
@@ -36,7 +41,9 @@ Promotion **updates the JSDispatchTable entry**, not a code pointer on the JSFun
 
 `src/baseline/`, `docs/compiler/sparkplug/compiler-sparkplug.md`. No IR. Linear pass over bytecode. Interpreter-compatible frames. Almost all work is calls to the same builtins Ignition uses. Exists to kill dispatch/decode overhead before Maglev/TF are ready.
 
-Compare Sparkplug output to bytecode: each opcode → a builtin call + control flow. `--print-opt-code-filter` / disassembler. Not dumped this pass.
+Compare Sparkplug output to bytecode: each opcode → a builtin call + control flow. `--print-opt-code-filter` / disassembler.
+
+**Proof** (`notes/_proofs/dumps/05-workbook/ex7-sparkplug.txt`, workbook EX7): the BASELINE disassembly under `--code-comments` is annotated with each bytecode, and `AddSmi` lowers to a call to the `AddSmi_Generic_Baseline` builtin — a linear per-bytecode walk, no IR.
 
 ## 5.3 Maglev
 

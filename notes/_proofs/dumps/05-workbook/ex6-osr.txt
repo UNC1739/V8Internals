@@ -1,0 +1,9 @@
+tier before call: other
+[OSR - setting osr urgency. function: compute, old urgency: 0, new urgency: 6]
+[OSR - compilation started. function: compute, osr offset: 46, mode: ConcurrencyMode::kConcurrent]
+[compiling method 0x3c940102a929 <JSFunction compute (sfi = 0x3c940102a899)> (target MAGLEV) OSR, mode: ConcurrencyMode::kConcurrent]
+[OSR - unavailable (failed or in progress). function: compute, osr offset: 46, mode: ConcurrencyMode::kConcurrent]
+[completed compiling 0x3c940102a929 <JSFunction compute (sfi = 0x3c940102a899)> (target MAGLEV) OSR - took 0.000, 10.598, 0.003 ms]
+[OSR - entry. function: compute, osr offset: 46]
+result = 4999950000
+tier after  call: other

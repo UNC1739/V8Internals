@@ -1,0 +1,20 @@
+### bytecode for f  (--print-bytecode)
+Bytecode length: 6
+Parameter count 2
+Register count 0
+         0x110a01000108 @    0 : 0b 03             Ldar a0
+         0x110a0100010a @    2 : 4f 01 00          AddSmi [1], EmbeddedFeedback[0]
+         0x110a0100010d @    5 : b9                Return
+
+### Sparkplug (BASELINE) code, each bytecode -> emitted code + builtin call
+kind = BASELINE
+                  [ 
+                    [ 
+                      [ Inlined  Trampoline for call to BaselineOutOfLinePrologue
+                    [ 
+                  [ 0b 03             Ldar a0
+                  [ 4f 01 00          AddSmi [1], EmbeddedFeedback[0]
+                    [ 
+                      [ Inlined  Trampoline for call to AddSmi_Generic_Baseline
+                  [ b9                Return
+                      [ Return

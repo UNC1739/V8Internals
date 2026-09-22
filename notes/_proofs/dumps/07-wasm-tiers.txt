@@ -1,0 +1,25 @@
+### d8 --print-wasm-code --liftoff-only 07-wasm.js  (baseline)
+kind: wasm function
+compiler: Liftoff
+Body (size = 160 = 152 + 8 padding)
+--
+kind = JS_TO_WASM_FUNCTION
+name = js-to-wasm:ii:i
+compiler = turbofan
+--
+kind: wasm function
+compiler: Liftoff
+Body (size = 160 = 160 + 0 padding)
+
+### d8 --print-wasm-code --no-liftoff 07-wasm.js  (optimizing)
+kind: wasm function
+compiler: TurboFan
+Body (size = 288 = 272 + 16 padding)
+--
+kind = JS_TO_WASM_FUNCTION
+name = js-to-wasm:ii:i
+compiler = turbofan
+--
+kind: wasm function
+compiler: TurboFan
+Body (size = 736 = 716 + 20 padding)

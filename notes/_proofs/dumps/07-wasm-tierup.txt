@@ -1,0 +1,3 @@
+### d8 --wasm-tiering-budget=1000 --trace-wasm-compiler 07-wasm.js
+Compiling wasm function 0 with liftoff
+Compiling wasm function 0 with turbofan

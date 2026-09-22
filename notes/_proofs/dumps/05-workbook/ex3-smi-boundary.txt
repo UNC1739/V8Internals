@@ -1,0 +1,3 @@
+A result overflows Smi : 1073741824  still TF? true
+[bailout (kind: deopt-eager, reason: not a Smi): begin. deoptimizing 0x34920102a925 <JSFunction sum (sfi = 0x34920102a885)>, 0x32c301000355 <Code TURBOFAN_JS>, opt id 0, node id 36, bytecode offset 2, deopt exit 0, FP to SP delta 32, caller SP 0x00016d2a9c98, pc 0x00015664038c]
+B inputs not Smi       : 2147483648  still TF? false

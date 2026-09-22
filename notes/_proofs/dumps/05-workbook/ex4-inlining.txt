@@ -1,0 +1,4 @@
+Considering 0x13c00e536f8 {0x229d0102a7c9 <SharedFunctionInfo square>} for inlining with 0x13c00e53ec0 {0x229d0102a985 <FeedbackVector[0]>}
+Inlining small function(s) at call site #21:JSCall
+Inlining 0x13c00e536f8 {0x229d0102a7c9 <SharedFunctionInfo square>} into 0x13c00e53418 {0x229d0102a7f9 <SharedFunctionInfo caller>}
+result = 17

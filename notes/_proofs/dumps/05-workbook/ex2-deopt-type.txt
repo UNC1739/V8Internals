@@ -1,0 +1,4 @@
+warm  : 11   tier = TurboFan
+[bailout (kind: deopt-eager, reason: not a Smi): begin. deoptimizing 0x09a70102a935 <JSFunction add (sfi = 0x9a70102a8a1)>, 0x3be10100039d <Code TURBOFAN_JS>, opt id 0, node id 36, bytecode offset 2, deopt exit 0, FP to SP delta 32, caller SP 0x00016dafdc88, pc 0x00015000038c]
+break : xy
+after : tier = Ignition
